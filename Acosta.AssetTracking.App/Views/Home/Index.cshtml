@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Acosta.AssetTracking.App.Models.AssetsViewModel>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h2>Assets List</h2>
+
+
+<h2>Search Assets by Type</h2>
+<div>
+    <label>Select Asset Type:</label>
+    <select id="uxAssetTypes" asp-items="@ViewBag.AssetTypeId"></select>
+</div>
+
+<div id="uxFilteredAssets">
+    @await Component.InvokeAsync("AssetsByType", 0)
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //alert("Document ready");
+            $("#uxAssetTypes").change(function () {
+                var assetTypeId = $("#uxAssetTypes").val();
+                //alert("Id value: " + String(id));
+                $.ajax({
+                    method: 'GET',
+                    url: '/Home/GetAssetsByType',
+                    data: { id: assetTypeId }
+                }).done(function (result, statusText, xhdr) {
+                    console.log('done updating');
+                    $("#uxFilteredAssets").html(result);
+                    });
+            });
+        });
+    </script>
+}
+

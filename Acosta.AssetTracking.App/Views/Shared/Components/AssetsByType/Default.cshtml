@@ -1,0 +1,27 @@
+﻿@model System.Collections.Generic.IEnumerable<Acosta.AssetTracking.App.Models.AssetsViewModel>
+@{
+    ViewData["Title"] = "Default";
+}
+
+<h2>Assets</h2>
+
+<table class="table">
+    <tr>
+        <th>TagNumber</th>
+        <th>Asset Type</th>
+        <th>Description</th>
+        <th>Serial Number</th>
+    </tr>
+
+    @foreach (var asset in Model)
+    {
+        <tr>
+            <td>@asset.TagNumber</td>
+            <td>@asset.AssetType</td>
+            <td>@asset.Description</td>          
+            <td>@asset.SerialNumber</td>
+        </tr>
+    }
+</table>
+
+
